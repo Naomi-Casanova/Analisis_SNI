@@ -14,5 +14,16 @@ dir.create ( path = "results")
 # Guardamos esta Data 
 write.csv( x = data_filtrada , file = "results/limpia.csv")
 
+# Calculamos la proporcion de DR y DRa que pierden el SNI
+data_resumen <- data_filtrada %>% 
+  filter( cambio == "perdio SNI")%>%
+  group_by( nobilis )%>%
+  summarise( totales = sum(miembros) )
+
+# Guardamos la data resumen 
+write.csv( x = data_resumen , file ="results/resumen.csv")
 
 
+# To - Do's
+# naomicasanova : Calcular el % de DR  y DRA que pierden 
+#                 SNI como  TOTAL_INGRESOS / TOTAL_PERDIDAS
